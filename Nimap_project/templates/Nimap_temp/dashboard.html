@@ -1,0 +1,72 @@
+{% extends 'Nimap_temp\base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Home Page</title>
+{% endblock title %}
+
+{% block body %}
+
+{% if messages %}
+
+    {% for msg in messages %}
+        <p {% if msg.tags %} class="p-3 alert-{{msg.tags}}"{% endif %}>{{msg}}</p>
+    {% endfor %}
+
+{% endif %}
+
+<div>
+    
+    <div class="container text-center border mt-3 shadow">
+        <h1 class="text-primary">Dashboard</h1>
+    </div>
+
+    <div class="container text-center border mt-3 shadow mb-3 p-4">
+
+        <div class="mb-5 pb-5">
+        <h3 style="font-family:cursive ; text-decoration: underline;" class="pb-2">Welcome  {{user}}</h3>
+        <div class="mt-4 mb-4">
+        <h4 style="font-family:cursive ;" class="text-primary">Projects Assigned To You</h4>
+        </div>
+
+            {% if data %}
+            <table class="table" >
+                <thead>
+                  <tr>
+                    <!-- <th scope="col">Sr.No</th> -->
+
+                    <th scope="col">Project Id</th>
+                    <th scope="col">Project Name</th>
+                    <th scope="col">Client Name</th>
+                    <th scope="col">Created At</th>
+                    <th scope="col">Created By</th>
+                    <th scope="col">Assigned To</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for d in data %}
+                  <tr>
+                    <td>{{d.record_id}}</td>
+                    <td>{{d.projects}}</td>
+                    <td>{{d.client_name}}</td>
+                    <td>{{d.created_at}}</td>
+                    <td>{{d.created_by}}</td>
+                    <td>{{d.user_assign_names}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+              </table>
+              
+              {% else %}
+    
+              <h2>No Data Added Yet</h2>
+    
+            {% endif %}
+    
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock body %}

@@ -1,0 +1,56 @@
+{% extends 'Nimap_temp\base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Add Project</title>
+{% endblock title %}
+
+{% block body %}
+
+{% if messages %}
+
+    {% for msg in messages %}
+        <p {% if msg.tags %} class="p-3 alert-{{msg.tags}}"{% endif %}>{{msg}}</p>
+    {% endfor %}
+
+{% endif %}
+
+<div class="container mt-3">
+    <div class="text-center">
+        <h1>Add Project</h1>
+    </div>
+
+    <div class="container border mt-3 shadow mb-3 p-4">
+    
+        <div>
+            <form action="{% url 'add_project' id %}" method="post">
+                {% csrf_token %}
+
+                {% for fm in form %}
+
+                    {{fm.label_tag}} {{fm}}
+                    <p class="text-danger">{{fm.errors|striptags}}</p>             
+
+                {% endfor %}
+
+                <label for="users_assign">Assign Users : (Hold down the Ctrl (windows) or Command (Mac) button to select multiple options.) </label>
+                <select name="users_assign" id="users_assign" class="form-control" multiple required>
+                    {% for u in users %}
+                    <option value="{{u.id}}">{{u.first_name}} {{u.last_name}} (ID : {{u.id}})</option>
+                    {% endfor %}
+                </select>
+
+                <div class="text-center mt-3">
+                    <button class="btn btn-success" type="submit">Add Project</button>
+                    <button class="btn btn-primary" type="reset">Reset</button>
+                </div>
+
+            </form>
+        </div>
+
+
+    </div>
+
+</div>
+
+{% endblock body %}

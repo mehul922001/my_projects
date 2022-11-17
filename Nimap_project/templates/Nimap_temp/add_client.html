@@ -1,0 +1,46 @@
+{% extends 'Nimap_temp\base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Add Client</title>
+{% endblock title %}
+
+{% block body %}
+
+{% if messages %}
+
+{% for msg in messages %}
+<p {% if msg.tags %} class="p-3 alert-{{msg.tags}}" {% endif %}>{{msg}}</p>
+{% endfor %}
+
+{% endif %}
+
+
+<div>
+
+    <div class="container text-center border mt-3 shadow rounded">
+        <h1> Add Client</h1>
+    </div>
+    <div class=" container mt-3 p-2 rounded">
+        <div class="card ms-5 me-5 mb-5 p-4 shadow">
+            <form action="{% url 'add_client' %}" method="post">
+            {% csrf_token %}
+            {% for fm in form %}
+
+            <div class="mb-2">{{fm.label_tag}}</div> {{fm}}
+            <p class="text-danger">{{fm.errors|striptags}}</p>  
+
+            {% endfor %}
+
+            <div class="text-center">
+                <button class="btn btn-success ps-5 pe-5 mt-4" type="submit"> Add </button>
+            </div>
+
+        </form>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock body %}

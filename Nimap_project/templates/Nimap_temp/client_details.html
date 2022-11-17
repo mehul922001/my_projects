@@ -1,0 +1,148 @@
+{% extends 'Nimap_temp\base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Add Client</title>
+{% endblock title %}
+
+{% block body %}
+
+{% if messages %}
+
+{% for msg in messages %}
+<p {% if msg.tags %} class="p-3 alert-{{msg.tags}}" {% endif %}>{{msg}}</p>
+{% endfor %}
+
+{% endif %}
+
+
+<div>
+
+    <div class="container text-center border mt-3 shadow rounded text-primary">
+        <h1>Client Information</h1>
+    </div>
+    <div class=" container mt-3 p-2 rounded">
+        <div class="row">
+
+            <div class="col-1">
+
+            </div>
+
+
+            <div class="col-10">
+
+
+                <div class="card ms-5 me-5 mb-5 p-4 shadow rounded">
+
+                    <div class="text-center text-primary" style="font-family:cursive ;"><h3>{{data.client_name}}</h3></div>
+                    
+
+                    <div class="m-2">
+                        <div class="row">
+                            <div class="col-3">
+                                <h5 class="" style="display:inline-block ;">Client ID</h5>
+                            </div>
+                            <div class="col-9">
+                                :<p class="d-inline ms-5">{{data.id}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="m-2">
+                        <div class="row">
+                            <div class="col-3">
+                                <h5 class="" style="display:inline-block ;">Client Name</h5>
+                            </div>
+                            <div class="col-9">
+                                :<p class="d-inline ms-5">{{data.client_name}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="m-2">
+                        <div class="row">
+                            <div class="col-3">
+                                <h5 class="" style="display:inline-block ;">Client Created At</h5>
+                            </div>
+                            <div class="col-9">
+                                :<p class="d-inline ms-5">{{data.created_at}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="m-2">
+                        <div class="row">
+                            <div class="col-3">
+                                <h5 class="" style="display:inline-block ;">Client Created By</h5>
+                            </div>
+                            <div class="col-9">
+                                :<p class="d-inline ms-5">{{data.created_by}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="m-2">
+                        <div class="row">
+                            {% if data.updated_by %}
+                            <div class="col-3">
+                                <h5 class="" style="display:inline-block ;">Client Updated By</h5>
+                            </div>
+                            <div class="col-9">
+                                :<p class="d-inline ms-5">{{data.updated_by}}</p>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="m-2">
+                        <h5>Project List </h5>
+                    </div>
+                    <div class="m-2">
+                        <ol>
+                            {% for p in projects %}
+                            <li>{{p.p_name}}</li>
+                            {% endfor %}
+                        </ol>
+                    </div>
+
+                    <div>
+                        <div class="row">
+                            <div class="col-4">
+                                <a href="{% url 'all_clients' %}" class="ms-5 btn btn-light text-primary border">Go Back To All Clients</a>
+                            </div>
+                            <div class="col-4">
+                                
+                            </div>
+                            <div class="col-4">
+                                <a href="{% url 'dashboard' %}" class="ms-5 btn btn-light text-primary border">Go To Dashboard</a>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div class="col-1">
+
+    </div>
+
+</div>
+
+</form>
+
+</div>
+</div>
+
+
+
+{% endblock body %}

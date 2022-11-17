@@ -1,0 +1,55 @@
+{% extends 'Nimap_temp\base.html' %}
+{% load static %}
+
+{% block title %}
+<title>Register Page</title>
+{% endblock title %}
+
+{% block body %}
+
+{% if messages %}
+
+    {% for msg in messages %}
+        <p {% if msg.tags %} class="p-3 alert-{{msg.tags}}"{% endif %} >{{msg}}</p>
+    {% endfor %}
+
+{% endif %}
+
+<div class="container">
+
+    <div class="text-center m-3 shadow">
+        <h1 class="text-primary">Register Here</h1>
+    </div>
+
+    <div>
+        <form action="{% url 'register' %}" method="post">
+            {% csrf_token %}
+
+            {% for fm in form %}
+            <!-- <div>
+                {{fm.label_tag}} : {{fm}}
+                <p class="text-danger">{{fm.errors|striptags}}</p>
+            </div> -->
+
+            <div class="mb-3">
+                {{fm.label_tag}} {{fm}}
+                <p class="text-danger">{{fm.errors|striptags}}</p>
+            </div>
+
+
+            {% endfor %}
+            <div class="mb-4">
+                <button class="btn btn-primary" type="submit">Register</button>
+                <button class="btn btn-danger" type="reset">Reset</button>
+            </div>
+
+        </form>
+    </div>
+
+    <div>
+
+    </div>
+
+</div>
+
+{% endblock body %}

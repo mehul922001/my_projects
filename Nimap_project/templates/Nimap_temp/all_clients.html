@@ -1,0 +1,67 @@
+{% extends 'Nimap_temp\base.html' %}
+{% load static %}
+
+{% block title %}
+<title>All Clients</title>
+{% endblock title %}
+
+{% block body %}
+
+{% if messages %}
+
+    {% for msg in messages %}
+        <p {% if msg.tags %} class="p-3 alert-{{msg.tags}}"{% endif %}>{{msg}}</p>
+    {% endfor %}
+
+{% endif %}
+
+<div>
+    
+    <div class="container text-center border mt-3 shadow">
+        <h1> All Clients</h1>
+    </div>
+    <div class="container border mt-3 shadow p-3">
+        <a href="{% url 'add_client' %}" class="btn btn-success">Add Client +</a>
+    </div>
+
+    <div class="container text-center border mt-3 shadow mb-3 p-4">
+
+        {% if data %}
+        <table class="table">
+            <thead>
+              <tr>
+                <!-- <th scope="col">Sr.No</th> -->
+                <th scope="col">Client Name</th>
+                <th scope="col">Client Id</th>
+                <th scope="col">Actions</th>
+                <th scope="col">Add Project</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for d in data %}
+              <tr>
+                <td><a href="{% url 'client_details' d.id %}" class="text-decoration-none" style="font-family:cursive;">{{d.client_name}}</a></td>
+                <td>{{d.id}}</td>
+                <td>
+                    <a href="{% url 'update_client' d.id %}" class="btn btn-primary">Update</a>
+                    <a href="{% url 'delete' d.id %}" class="btn btn-danger">Delete</a>
+                </td>
+                <td>
+                    <a href="{% url 'add_project' d.id %}" class="btn btn-success">Add +</a>
+                </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          
+          {% else %}
+
+          <h2>No Data Added Yet</h2>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+{% endblock body %}

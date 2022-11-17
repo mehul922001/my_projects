@@ -1,0 +1,87 @@
+{% extends 'Nimap_temp\base.html' %}
+{% load static %}
+
+{% block title %}
+<title>All Clients</title>
+{% endblock title %}
+
+{% block body %}
+
+{% if messages %}
+
+    {% for msg in messages %}
+        <p {% if msg.tags %} class="p-3 alert-{{msg.tags}}"{% endif %}>{{msg}}</p>
+    {% endfor %}
+
+{% endif %}
+
+<div>
+    
+    <div class="container text-center border mt-3 shadow">
+        <h1>Projects</h1>
+    </div>
+
+    <div class="container text-center border mt-3 shadow mb-3 p-4">
+
+        <h3>All Projects</h3>
+
+        <div class="mb-5 pb-5">
+
+        {% if data %}
+        <table class="table" >
+            <thead>
+              <tr>
+                <!-- <th scope="col">Sr.No</th> -->
+
+                <th scope="col">Project Id</th>
+                <th scope="col">Project Name</th>
+                <th scope="col">Client Name</th>
+                <th scope="col">Created At</th>
+                <th scope="col">Created By</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for d in data %}
+              <tr>
+                <td>{{d.id}}</td>
+                <td>{{d.p_name}}</td>
+                <td>{{d.client_name}}</td>
+                <td>{{d.p_created_at}}</td>
+                <td>{{d.p_created_by}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          
+          {% else %}
+
+          <h2>No Data Added Yet</h2>
+
+        {% endif %}
+
+    </div>  
+
+
+        <div>
+            <div class="row">
+                <div class="col-4">
+                    <a href="{% url 'all_clients' %}" class=" btn btn-light text-primary border">Go Back To All Clients</a>
+                </div>
+                <div class="col-4">
+                    
+                </div>
+                <div class="col-4">
+                    <a href="{% url 'dashboard' %}" class=" btn btn-light text-primary border">Go To Dashboard</a>
+                </div>
+            </div>
+            
+        </div>
+
+    </div>
+
+    
+
+
+</div>
+
+{% endblock body %}
